@@ -1,0 +1,30 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "uat" ]
+  pull_request:
+    branches: [ "uat" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+
+    - name: Deploy UAT
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+
+    - name: Test UAT
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+
+    - name: Deploy PROD
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+
+    - name: Test PROD
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
