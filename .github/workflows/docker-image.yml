@@ -7,13 +7,12 @@ on: workflow_dispatch
   #   branches: [ "uat" ]
   
 jobs:
-
-  build:
-
+  docker:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v4
     - name: Login (Yandex Cloud)
       id: login-cr
       uses: yc-actions/yc-cr-login@v1
@@ -23,8 +22,8 @@ jobs:
     - name: Build image (Yandex Cloud)
       env:
         CR_REGISTRY: crp520okjbk610p5su7h
-        CR_REPOSITORY: iac
+        CR_REPOSITORY: finnhubProducer
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:user$IMAGE_TAG ./finnhubProducer/
-        docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:user$IMAGE_TAG
+        docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:user$IMAGE_TAG ./$CR_REPOSITORY/
+        docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest
