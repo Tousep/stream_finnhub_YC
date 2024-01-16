@@ -1,11 +1,11 @@
 name: Docker Image CI
 
-on:
-  push:
-    branches: [ "uat" ]
-  pull_request:
-    branches: [ "uat" ]
-
+on: workflow_dispatch
+  # push:
+  #   branches: [ "uat" ]
+  # pull_request:
+  #   branches: [ "uat" ]
+  
 jobs:
 
   build:
