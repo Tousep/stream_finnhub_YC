@@ -23,7 +23,8 @@ jobs:
       env:
         CR_REGISTRY: crp520okjbk610p5su7h
         CR_REPOSITORY: finnhub_producer
+        WORK_DIR: finnhubProducer
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest ./$CR_REPOSITORY/
+        docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest ./$WORK_DIR/
         docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest
