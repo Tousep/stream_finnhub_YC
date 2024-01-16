@@ -25,5 +25,5 @@ jobs:
         CR_REPOSITORY: finnhubProducer
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        docker build cr.yandex/$CR_REGISTRY/ -t $CR_REPOSITORY:latest -t $CR_REPOSITORY:user$IMAGE_TAG ./$CR_REPOSITORY/
+        docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:user$IMAGE_TAG ./$CR_REPOSITORY/
         docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest
