@@ -22,7 +22,7 @@ jobs:
     - name: Build image (Yandex Cloud)
       env:
         CR_REGISTRY: crp520okjbk610p5su7h
-        CR_REPOSITORY: finnhubProducer
+        CR_REPOSITORY: finnhub_producer
         IMAGE_TAG: ${{ github.sha }}
       run: |
         docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest ./$CR_REPOSITORY/
