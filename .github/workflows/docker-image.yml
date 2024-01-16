@@ -14,17 +14,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Login (Yandex Cloud)
+      id: login-cr
+      uses: yc-actions/yc-cr-login@v1
+      with:
+        yc-sa-json-credentials: ${{ secrets.iac_sacc_secret }}
 
-    - name: Deploy UAT
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-
-    - name: Test UAT
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-
-    - name: Deploy PROD
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-
-    - name: Test PROD
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Build image (Yandex Cloud)
+      env:
+        CR_REGISTRY: crp520okjbk610p5su7h
+        CR_REPOSITORY: iac
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:user$IMAGE_TAG ./finnhubProducer/
+        docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:user$IMAGE_TAG
