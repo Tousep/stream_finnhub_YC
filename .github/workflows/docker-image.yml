@@ -18,7 +18,6 @@ jobs:
       uses: yc-actions/yc-cr-login@v1
       with:
         yc-sa-json-credentials: ${{ secrets.iac_sacc_secret }}
-
     - name: Build image (Yandex Cloud)
       env:
         CR_REGISTRY: crp520okjbk610p5su7h
@@ -26,5 +25,5 @@ jobs:
         WORK_DIR: finnhubProducer
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:user$IMAGE_TAG ./$WORK_DIR/
+        docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest ./$WORK_DIR/
         docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest
