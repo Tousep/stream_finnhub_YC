@@ -36,6 +36,10 @@ jobs:
       working-directory: ./terraform-ydb
       run: terraform init
 
+    - name: Terraform Init
+      working-directory: ./terraform-ydb
+      run: cat ${{ secret.IAC_SACC_SECRET }} >> key.json
+
     # Checks that all Terraform configuration files adhere to a canonical format
     # - name: Terraform Format
     #   working-directory: ./terraform-ydb
