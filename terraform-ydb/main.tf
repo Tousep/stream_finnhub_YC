@@ -9,6 +9,6 @@ terraform {
 
 provider "yandex" {
   service_account_key_file = file("key.json")
-  folder_id = "::add-mask::b1gceigr50kq5nudfjfb"
+  folder_id = "{{ env.iac_folder }}"
   zone = "ru-central1-b"
 }
