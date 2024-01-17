@@ -1,6 +1,6 @@
 resource "yandex_container_registry" "finnhub" {
   name = "finnhub"
-  folder_id = "b1gh11gr471pupbosu5q"
+  folder_id = "{{ env.iac_folder }}"
   labels = {
     my-label = "finnhub"
   }
