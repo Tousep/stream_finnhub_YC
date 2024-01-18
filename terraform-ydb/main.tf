@@ -8,6 +8,6 @@ terraform {
 }
 
 provider "yandex" {
-  token = ${{ env.token }}
+  token = var.token 
   zone = "ru-central1-b"
 }
