@@ -13,8 +13,7 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    environment: production
-
+    environment: uat
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
@@ -23,7 +22,15 @@ jobs:
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
+
+    - name: IAM Token
+      id: issue-iam-token
+      uses: yc-actions/yc-iam-token@v1
+      with:
+        yc-key-id: ${{ secrets.YC_KEY_ID }}
+        yc-service-account-id: ${{ secrets.YC_SERVICE_ACCOUNT_ID }}
+        yc-private-key: ${{ secrets.YC_PRIVATE_KEY }}
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
