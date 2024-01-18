@@ -1,6 +1,6 @@
 resource "yandex_vpc_network" "finnhub_net" {
   name = "finnhub_net"
-  folder_id = "{env.YC_FOLDER_ID}"
+  folder_id = "{var.YC_FOLDER_ID}"
 }
 
 resource "yandex_vpc_subnet" "finnhub_subnet" {
