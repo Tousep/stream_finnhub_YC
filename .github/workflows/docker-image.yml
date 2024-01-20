@@ -30,7 +30,7 @@ jobs:
 
     - name: Build image (Yandex Cloud)
       env:
-        CR_REGISTRY: ${{ env.YC_CONTAINER_REGISTRY }}
+        CR_REGISTRY: ${{ vars.YC_CONTAINER_REGISTRY }}
         CR_REPOSITORY: finnhub_producer
         WORK_DIR: finnhubProducer
         IMAGE_TAG: ${{ github.sha }}
