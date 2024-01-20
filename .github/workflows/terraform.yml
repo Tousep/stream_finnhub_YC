@@ -52,6 +52,8 @@ jobs:
       env:
         token: ${{steps.issue-iam-token.outputs.token}}
 
+    - name: echo 
+      run: echo ${{steps.issue-iam-token.outputs.token}}
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       working-directory: ./terraform-ydb
