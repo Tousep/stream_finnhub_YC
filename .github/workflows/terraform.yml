@@ -35,31 +35,25 @@ jobs:
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
-      env:
-        token: ${{steps.issue-iam-token.outputs.token}}
       
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       working-directory: ./terraform-ydb
       run: terraform init
       env:
-        token: ${{steps.issue-iam-token.outputs.token}}
+        YC_TOKEN: ${{steps.issue-iam-token.outputs.token}}
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
       working-directory: ./terraform-ydb
       run: terraform fmt
-      env:
-        token: ${{steps.issue-iam-token.outputs.token}}
 
-    - name: echo 
-      run: echo ${{steps.issue-iam-token.outputs.token}}
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       working-directory: ./terraform-ydb
       run: terraform plan -input=false
       env:
-        token: ${{steps.issue-iam-token.outputs.token}}
+        YC_TOKEN: ${{steps.issue-iam-token.outputs.token}}
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
@@ -68,4 +62,4 @@ jobs:
       run: terraform apply -auto-approve -input=false
       env:
         YC_FOLDER_ID: ${{env.YC_FOLDER_ID}}
-        token: ${{steps.issue-iam-token.outputs.token}}
+        YC_TOKEN: ${{steps.issue-iam-token.outputs.token}}
