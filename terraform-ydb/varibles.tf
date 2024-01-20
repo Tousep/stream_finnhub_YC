@@ -5,4 +5,4 @@ variable "finnhub_stocks_tickers" {
               "BINANCE:XRPUSDT",
               "BINANCE:DOGEUSDT" ]
 }
-
+variable "YC_TOKEN" { type= string }
