@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  terraform:
+  terraform_apply:
     name: 'Terraform'
     runs-on: ubuntu-latest
     environment: uat
@@ -62,8 +62,7 @@ jobs:
         YC_TOKEN: ${{ steps.issue-iam-token.outputs.token }}
         YC_FOLDER_ID: ${{ vars.YC_FOLDER_ID }}
       run: terraform apply -auto-approve -var="YC_TOKEN=$YC_TOKEN" -var="YC_FOLDER_ID=$YC_FOLDER_ID"
-    
-
+  
   terraform_destroy:
     name: 'Terraform destroy'
     runs-on: ubuntu-latest
@@ -72,32 +71,30 @@ jobs:
     defaults:
       run:
         shell: bash
-    if: ${{ always() }}
-      needs: [terraform]
 
-      steps:
-        # Checkout the repository to the GitHub Actions runner
-        - name: Checkout
-          uses: actions/checkout@v4
-    
-        - name: IAM Token
-          id: issue-iam-token
-          uses: yc-actions/yc-iam-token@v1
-          with: 
-            yc-key-id: ${{ secrets.YC_KEY_ID }}
-            yc-service-account-id: ${{ secrets.YC_SERVICE_ACCOUNT_ID }}
-            yc-private-key: ${{ secrets.YC_PRIVATE_KEY }}
-    
-        - name: Setup Terraform
-          uses: hashicorp/setup-terraform@v1
-          
-        - name: Terraform Init
-          working-directory: ./terraform-ydb
-          run: terraform init
+    steps:
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v4
+  
+      - name: IAM Token
+        id: issue-iam-token
+        uses: yc-actions/yc-iam-token@v1
+        with: 
+          yc-key-id: ${{ secrets.YC_KEY_ID }}
+          yc-service-account-id: ${{ secrets.YC_SERVICE_ACCOUNT_ID }}
+          yc-private-key: ${{ secrets.YC_PRIVATE_KEY }}
+  
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        
+      - name: Terraform Init
+        working-directory: ./terraform-ydb
+        run: terraform init
 
-        - name: Terraform destroy
-          working-directory: ./terraform-ydb
-          env:
-            YC_TOKEN: ${{ steps.issue-iam-token.outputs.token }}
-            YC_FOLDER_ID: ${{ vars.YC_FOLDER_ID }}
-          run: terraform destroy -auto-approve  -var="YC_TOKEN=$YC_TOKEN" -var="YC_FOLDER_ID=$YC_FOLDER_ID"
+      - name: Terraform destroy
+        working-directory: ./terraform-ydb
+        env:
+          YC_TOKEN: ${{ steps.issue-iam-token.outputs.token }}
+          YC_FOLDER_ID: ${{ vars.YC_FOLDER_ID }}
+        run: terraform destroy -auto-approve  -var="YC_TOKEN=$YC_TOKEN" -var="YC_FOLDER_ID=$YC_FOLDER_ID"
