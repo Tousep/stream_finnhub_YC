@@ -6,3 +6,4 @@ variable "finnhub_stocks_tickers" {
               "BINANCE:DOGEUSDT" ]
 }
 variable "YC_TOKEN" { type= string }
+variable "YC_FOLDER_ID" { type= string }
