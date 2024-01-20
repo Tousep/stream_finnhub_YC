@@ -92,6 +92,14 @@ jobs:
         working-directory: ./terraform-ydb
         run: terraform init
 
+      # Generates an execution plan for Terraform
+      - name: Terraform Plan
+        working-directory: ./terraform-ydb
+        env:
+          YC_TOKEN: ${{ steps.issue-iam-token.outputs.token }}
+          YC_FOLDER_ID: ${{ vars.YC_FOLDER_ID }}
+        run: terraform plan -destroy -var="YC_TOKEN=$YC_TOKEN" -var="YC_FOLDER_ID=$YC_FOLDER_ID"
+
       - name: Terraform destroy
         working-directory: ./terraform-ydb
         env:
