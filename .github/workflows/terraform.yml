@@ -26,11 +26,9 @@ jobs:
 
     - name: IAM Token
       id: issue-iam-token
-      uses: yc-actions/yc-iam-token@v1
+      uses: yc-actions/yc-iam-token@v1.1.0
       with:
-        yc-key-id: ${{ secrets.YC_KEY_ID }}
-        yc-service-account-id: ${{ secrets.YC_SERVICE_ACCOUNT_ID }}
-        yc-private-key: ${{ secrets.YC_PRIVATE_KEY }}
+        yc-sa-json-credentials: ${{ secrets.iac_sacc_secret }}
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
