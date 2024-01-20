@@ -72,6 +72,7 @@ jobs:
       run:
         shell: bash
     needs: terraform_apply
+    if: always()
 
     steps:
       # Checkout the repository to the GitHub Actions runner
