@@ -62,6 +62,13 @@ jobs:
         YC_TOKEN: ${{ steps.issue-iam-token.outputs.token }}
         YC_FOLDER_ID: ${{ vars.YC_FOLDER_ID }}
       run: terraform apply -auto-approve -var="YC_TOKEN=$YC_TOKEN" -var="YC_FOLDER_ID=$YC_FOLDER_ID"
+
+    - name: Terraform destroy
+      working-directory: ./terraform-ydb
+      env:
+        YC_TOKEN: ${{ steps.issue-iam-token.outputs.token }}
+        YC_FOLDER_ID: ${{ vars.YC_FOLDER_ID }}
+      run: terraform destroy -auto-approve  -var="YC_TOKEN=$YC_TOKEN" -var="YC_FOLDER_ID=$YC_FOLDER_ID"
   
   terraform_destroy:
     name: 'Terraform destroy'
