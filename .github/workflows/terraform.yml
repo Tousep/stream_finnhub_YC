@@ -71,6 +71,7 @@ jobs:
     defaults:
       run:
         shell: bash
+    needs: terraform_apply
 
     steps:
       # Checkout the repository to the GitHub Actions runner
