@@ -28,9 +28,9 @@ jobs:
       id: issue-iam-token
       uses: yc-actions/yc-iam-token@v1
       with:
-        yc-key-id: ${{ env.YC_KEY_ID }}
-        yc-service-account-id: ${{ env.YC_SERVICE_ACCOUNT_ID }}
-        yc-private-key: ${{ env.YC_PRIVATE_KEY }}
+        yc-key-id: ${{ secrets.YC_KEY_ID }}
+        yc-service-account-id: ${{ secrets.YC_SERVICE_ACCOUNT_ID }}
+        yc-private-key: ${{ secrets.YC_PRIVATE_KEY }}
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
@@ -44,9 +44,9 @@ jobs:
       run: terraform init
 
     # Checks that all Terraform configuration files adhere to a canonical format
-    # - name: Terraform Format
-    #   working-directory: ./terraform-ydb
-    #   run: terraform fmt -check
+    - name: Terraform Format
+      working-directory: ./terraform-ydb
+      run: terraform fmt -check
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
