@@ -26,7 +26,7 @@ jobs:
 
     - name: IAM Token
       id: issue-iam-token
-      uses: yc-actions/yc-iam-token@v1
+      uses: yc-actions/yc-cr-login@v1
       with:
         yc-sa-json-credentials: ${{ secrets.iac_sacc_secret }}
         # yc-key-id: ${{ secrets.YC_KEY_ID }}
