@@ -57,4 +57,4 @@ jobs:
       working-directory: ./terraform-ydb
       env:
         YC_TOKEN: ${{ steps.issue-iam-token.outputs.token }}
-      run: terraform apply -auto-approve -var="YC_TOKEN=$YC_TOKEN"
+      run: terraform apply -auto-approve -var="token=$YC_TOKEN"
