@@ -8,7 +8,9 @@ on: workflow_dispatch
   
 jobs:
   docker:
+    name: ' Docker build/push'
     runs-on: ubuntu-latest
+    environment: uat
 
     steps:
     - name: Checkout
@@ -17,7 +19,9 @@ jobs:
       id: login-cr
       uses: yc-actions/yc-cr-login@v1
       with:
-        yc-sa-json-credentials: ${{ secrets.iac_sacc_secret }}
+        yc-key-id: ${{ secrets.YC_KEY_ID }}
+        yc-service-account-id: ${{ secrets.YC_SERVICE_ACCOUNT_ID }}
+        yc-private-key: ${{ secrets.YC_PRIVATE_KEY }}
     - name: Build image (Yandex Cloud)
       env:
         CR_REGISTRY: crp520okjbk610p5su7h
