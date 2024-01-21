@@ -36,20 +36,20 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
     
-    - name: Setup Terraform Backend
-      id: backend
-      run: |
-        cat > backend.tf << EOF
-        terraform {
-          backend "remote" {
-            organization = "${secrets.TF_CLOUD_ORGANIZATION}"
+    # - name: Setup Terraform Backend
+    #   id: backend
+    #   run: |
+    #     cat > backend.tf << EOF
+    #     terraform {
+    #       backend "remote" {
+    #         organization = "${secrets.TF_CLOUD_ORGANIZATION}"
 
-            workspaces {
-              name = "${secrets.TF_CLOUD_WORKSPACE}"
-            }
-          }
-        }
-        EOF
+    #         workspaces {
+    #           name = "${secrets.TF_CLOUD_WORKSPACE}"
+    #         }
+    #       }
+    #     }
+    #     EOF
       
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
