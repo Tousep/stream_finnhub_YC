@@ -70,7 +70,9 @@ jobs:
       env:
         YC_TOKEN: ${{ steps.issue-iam-token.outputs.token }}
         YC_FOLDER_ID: ${{ vars.YC_FOLDER_ID }}
-      run: terraform plan -var="YC_TOKEN=$YC_TOKEN" -var="YC_FOLDER_ID=$YC_FOLDER_ID"
+        YC_CONTAINER_REGISTRY: ${{ vars.YC_CONTAINER_REGISTRY }}
+        YC_SERVICE_ACCOUNT_ID: ${{ secrets.YC_SERVICE_ACCOUNT_ID }}
+      run: terraform plan -var="YC_TOKEN=$YC_TOKEN" -var="YC_FOLDER_ID=$YC_FOLDER_ID" -var="YC_CONTAINER_REGISTRY=$YC_CONTAINER_REGISTRY" -var="YC_SERVICE_ACCOUNT_ID=$YC_SERVICE_ACCOUNT_ID"
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
@@ -79,7 +81,9 @@ jobs:
       env:
         YC_TOKEN: ${{ steps.issue-iam-token.outputs.token }}
         YC_FOLDER_ID: ${{ vars.YC_FOLDER_ID }}
-      run: terraform apply -auto-approve -var="YC_TOKEN=$YC_TOKEN" -var="YC_FOLDER_ID=$YC_FOLDER_ID"
+        YC_CONTAINER_REGISTRY: ${{ vars.YC_CONTAINER_REGISTRY }}
+        YC_SERVICE_ACCOUNT_ID: ${{ secrets.YC_SERVICE_ACCOUNT_ID }}
+      run: terraform apply -auto-approve -var="YC_TOKEN=$YC_TOKEN" -var="YC_FOLDER_ID=$YC_FOLDER_ID" -var="YC_CONTAINER_REGISTRY=$YC_CONTAINER_REGISTRY" -var="YC_SERVICE_ACCOUNT_ID=$YC_SERVICE_ACCOUNT_ID"
 
   terraform_destroy:
     name: 'Terraform destroy'
@@ -121,11 +125,15 @@ jobs:
         env:
           YC_TOKEN: ${{ steps.issue-iam-token.outputs.token }}
           YC_FOLDER_ID: ${{ vars.YC_FOLDER_ID }}
-        run: terraform plan -destroy -var="YC_TOKEN=$YC_TOKEN" -var="YC_FOLDER_ID=$YC_FOLDER_ID"
+          YC_CONTAINER_REGISTRY: ${{ vars.YC_CONTAINER_REGISTRY }}
+          YC_SERVICE_ACCOUNT_ID: ${{ secrets.YC_SERVICE_ACCOUNT_ID }}
+        run: terraform plan -destroy -var="YC_TOKEN=$YC_TOKEN" -var="YC_FOLDER_ID=$YC_FOLDER_ID" -var="YC_CONTAINER_REGISTRY=$YC_CONTAINER_REGISTRY" -var="YC_SERVICE_ACCOUNT_ID=$YC_SERVICE_ACCOUNT_ID"
 
       - name: Terraform destroy
         working-directory: ./terraform-ydb
         env:
           YC_TOKEN: ${{ steps.issue-iam-token.outputs.token }}
           YC_FOLDER_ID: ${{ vars.YC_FOLDER_ID }}
-        run: terraform destroy -auto-approve  -var="YC_TOKEN=$YC_TOKEN" -var="YC_FOLDER_ID=$YC_FOLDER_ID"
+          YC_CONTAINER_REGISTRY: ${{ vars.YC_CONTAINER_REGISTRY }}
+          YC_SERVICE_ACCOUNT_ID: ${{ secrets.YC_SERVICE_ACCOUNT_ID }}
+        run: terraform destroy -auto-approve  -var="YC_TOKEN=$YC_TOKEN" -var="YC_FOLDER_ID=$YC_FOLDER_ID" -var="YC_CONTAINER_REGISTRY=$YC_CONTAINER_REGISTRY" -var="YC_SERVICE_ACCOUNT_ID=$YC_SERVICE_ACCOUNT_ID"

@@ -7,3 +7,5 @@ variable "finnhub_stocks_tickers" {
 }
 variable "YC_TOKEN" { type= string }
 variable "YC_FOLDER_ID" { type= string }
+variable "YC_CONTAINER_REGISTRY" { type= string }
+variable "YC_SERVICE_ACCOUNT_ID" { type= string }
