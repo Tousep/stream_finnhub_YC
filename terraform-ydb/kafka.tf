@@ -4,7 +4,7 @@ resource "yandex_mdb_kafka_cluster" "finnhub" {
   network_id          = yandex_vpc_network.finnhub_net.id
   subnet_ids          = flatten([yandex_vpc_subnet.finnhub_subnet.id]) ## flatten - костыль, без него ошибка Inappropriate value for attribute "subnet_ids": list of string required.
   security_group_ids  = [ yandex_vpc_security_group.finnhub_sec_gr.id ]
-  deletion_protection = true
+  deletion_protection = false
   config {
     assign_public_ip = true
     brokers_count    = 1
