@@ -55,10 +55,9 @@ jobs:
     - name: Terraform Init
       working-directory: ./terraform-ydb
       env:
-        YC_TOKEN: ${{ steps.issue-iam-token.outputs.token }}
         ACCESS_KEY: ${{ secrets.TF_S3_ACCESS_KEY }}
         SECRET_KEY: ${{ secrets.TF_S3_SECRET_KEY }}
-      run: terraform init -backend-config="YC_TOKEN=$YC_TOKEN"
+      run: terraform init -backend-config="access_key=$ACCESS_KEY" -backend-config="secret_key=$SECRET_KEY"
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
