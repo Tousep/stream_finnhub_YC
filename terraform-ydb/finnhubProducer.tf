@@ -1,13 +1,13 @@
 resource "yandex_serverless_container" "finnhubProducer" {
    name               = "test-container"
    memory             = 256
-   service_account_id = vars.YC_SERVICE_ACCOUNT_ID
+   service_account_id = var.YC_SERVICE_ACCOUNT_ID
     connectivity {
         network_id = yandex_vpc_network.finnhub_net.id
     }
    concurrency = 1
    image {
-      url = "cr.yandex/${vars.YC_CONTAINER_REGISTRY}/finnhub_producer:latest"
+      url = "cr.yandex/${var.YC_CONTAINER_REGISTRY}/finnhub_producer:latest"
       environment = {
             FINNHUB_STOCKS_TICKERS=jsonencode(var.finnhub_stocks_tickers)
             FINNHUB_API_TOKEN="cjefovhr01qgod9amfngcjefovhr01qgod9amfo0"
