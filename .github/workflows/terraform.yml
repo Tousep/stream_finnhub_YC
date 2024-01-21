@@ -71,20 +71,13 @@ jobs:
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
-    # - name: Terraform Apply
-    #   working-directory: ./terraform-ydb
-    #   env:
-    #     YC_TOKEN: ${{ steps.issue-iam-token.outputs.token }}
-    #     YC_FOLDER_ID: ${{ vars.YC_FOLDER_ID }}
-    #   run: terraform apply -auto-approve -var="YC_TOKEN=$YC_TOKEN" -var="YC_FOLDER_ID=$YC_FOLDER_ID"
-
-    - name: Terraform destroy
+    - name: Terraform Apply
       working-directory: ./terraform-ydb
       env:
         YC_TOKEN: ${{ steps.issue-iam-token.outputs.token }}
         YC_FOLDER_ID: ${{ vars.YC_FOLDER_ID }}
-      run: terraform destroy -auto-approve  -var="YC_TOKEN=$YC_TOKEN" -var="YC_FOLDER_ID=$YC_FOLDER_ID"
-  
+      run: terraform apply -auto-approve -var="YC_TOKEN=$YC_TOKEN" -var="YC_FOLDER_ID=$YC_FOLDER_ID"
+
   terraform_destroy:
     name: 'Terraform destroy'
     runs-on: ubuntu-latest
