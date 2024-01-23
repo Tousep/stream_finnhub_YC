@@ -1,14 +1,14 @@
 name: 'Test infra'
 
 on: #workflow_dispatch
-    workflow_call:
-        inputs:
-            config-path:
-                required: true
-                type: string
-        secrets:
-            token:
-                required: true
+  workflow_call:
+    inputs:
+      config-path:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
 
 permissions:
   contents: read
@@ -22,3 +22,7 @@ jobs:
     defaults:
       run:
         shell: bash
+    steps:
+        # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v4
