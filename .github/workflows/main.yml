@@ -3,7 +3,7 @@ name: 'main'
 on: workflow_dispatch
 
 jobs:
-  chill:
+  main:
     name: 'Terraform'
     runs-on: ubuntu-latest
     environment: uat
@@ -11,6 +11,6 @@ jobs:
     defaults:
       run:
         shell: bash
-
+  
   call-workflow-2-in-local-repo:
-      uses: ./.github/workflows/test.yml
+    uses: Tousep/stream_finnhub_YC/.github/workflows/test.yml
