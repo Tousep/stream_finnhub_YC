@@ -13,4 +13,4 @@ jobs:
         shell: bash
   
   call-workflow-2-in-local-repo:
-    uses: Tousep/stream_finnhub_YC/.github/workflows/test.yml
+    uses: ./.github/workflows/test.yml
