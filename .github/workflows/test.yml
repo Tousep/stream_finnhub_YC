@@ -1,0 +1,24 @@
+name: 'Test infra'
+
+on: #workflow_dispatch
+    workflow_call:
+        inputs:
+            config-path:
+                required: true
+                type: string
+        secrets:
+            token:
+                required: true
+
+permissions:
+  contents: read
+
+jobs:
+  test_infra:
+    name: 'Test infra'
+    runs-on: ubuntu-latest
+    environment: uat
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
