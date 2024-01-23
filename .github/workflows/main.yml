@@ -1,0 +1,12 @@
+name: 'main'
+
+on: workflow_dispatch
+jobs:
+    chill:
+        name: 'Terraform'
+        runs-on: ubuntu-latest
+        environment: uat
+        # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+        defaults:
+            run:
+                shell: bash
