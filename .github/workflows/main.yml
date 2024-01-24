@@ -12,5 +12,7 @@ jobs:
       run:
         shell: bash
   
-  call-workflow-2-in-local-repo:
-    uses: ./.github/workflows/test.yml
+  call-test:
+    uses: Tousep/stream_finnhub_YC/.github/workflows/test.yml
+    with:
+      environmentсс: uat
