@@ -22,7 +22,6 @@ resource "yandex_datatransfer_endpoint" "cl-target" {
 resource "yandex_datatransfer_transfer" "finnhub-transfer" {
  description = "Transfer from the Managed Service for Kafka to the Managed Service for ClickHouse"
  name        = "transfer-from-mkf-to-mch"
- source_id   = "dtedeebmc6jbkj3rdfd0"
  target_id   = "${yandex_datatransfer_endpoint.cl-target.id}"
  type        = "INCREMENT_ONLY"
 }
