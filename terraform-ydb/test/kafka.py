@@ -1,4 +1,3 @@
-import request
 from confluent_kafka import Consumer, Producer
 
 
