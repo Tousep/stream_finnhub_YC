@@ -42,13 +42,16 @@ jobs:
         # Checkout the repository to the GitHub Actions runner
       - name: Checkout
         uses: actions/checkout@v4
-      - name: add sert
-        run: mkdir --parents ./ca-certificates/Yandex && \
-          wget "https://storage.yandexcloud.net/cloud-certs/RootCA.pem" \
-            --output-document ./ca-certificates/Yandex/RootCA.crt && \
-          wget "https://storage.yandexcloud.net/cloud-certs/IntermediateCA.pem" \
-            --output-document ./ca-certificates/Yandex/IntermediateCA.crt && \
-          chmod 655 \
+      - run: mkdir --parents ./ca-certificates/Yandex
+      - uses: wei/wget@v1
+        with:
+          args: -O ./ca-certificates/Yandex/RootCA.crt https://storage.yandexcloud.net/cloud-certs/RootCA.pem
+      - uses: wei/wget@v1
+        with:
+          args: -O ./ca-certificates/Yandex/IntermediateCA.crt https://storage.yandexcloud.net/cloud-certs/IntermediateCA.pem
+      - name: chmod
+        run: chmod 655 \
             ./ca-certificates/Yandex/RootCA.crt \
             ./ca-certificates/Yandex/IntermediateCA.crt && \
-          update-ca-certificates
+      - name: chmod
+        run: update-ca-certificates
