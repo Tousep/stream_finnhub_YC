@@ -7,6 +7,8 @@ permissions:
   contents: read
 
 jobs:
+  # checkout:
+  #   uses: ./.gihub/workflows/test/yml
   main:
     name: 'Terraform test'
     runs-on: ubuntu-latest
@@ -20,8 +22,8 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4    
     - name: 'LL'
-      run: 'tree ../'
+      run: 'tree /'
     - name: 'Testing'
-      uses: Tousep/stream_finnhub_YC/.github/workflows/test.yml@main
+      uses: ./.github/workflows/test.yml
       with:
         environment: uat
