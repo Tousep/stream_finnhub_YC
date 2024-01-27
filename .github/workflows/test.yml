@@ -49,8 +49,10 @@ jobs:
       - uses: wei/wget@v1
         with:
           args: -O ./ca-certificates/Yandex/IntermediateCA.crt https://storage.yandexcloud.net/cloud-certs/IntermediateCA.pem
-      - name: chmod
-        run: chmod 655 ./ca-certificates/Yandex/RootCA.crt
-          chmod 655 ./ca-certificates/Yandex/IntermediateCA.crt
-      - name: chmod
+      # - name: chmod
+      #   run: chmod 655 ./ca-certificates/Yandex/RootCA.crt
+      #     chmod 655 ./ca-certificates/Yandex/IntermediateCA.crt
+      - name: update serts
         run: update-ca-certificates
+      - name: pytest
+        run: python ./terraform-ydb/test/kafka.py
