@@ -13,6 +13,6 @@ jobs:
         shell: bash
   
   call-test:
-    uses: Tousep/stream_finnhub_YC/.github/workflows/test.yml
+    uses: ./.github/workflows/test.yml
     with:
       environmentсс: uat
