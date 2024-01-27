@@ -1,19 +1,26 @@
-import rpc
+import request
+from confluent_kafka import Consumer, Producer
 
-rpc Get (GetDiskRequest) returns (Disk) {
-    option (google.api.http) = {
-        get: "/compute/v1/disks/{disk_id}"
-    };
+
+def kafka_check_topic(event, context):
+    params = {
+        'bootstrap.servers': 'rc1b-namn6f7m2172e4n9.mdb.yandexcloud.net:9091',
+        'security.protocol': 'SASL_PLAINTEXT',
+        'sasl.mechanism': 'SCRAM-SHA-512',
+        'sasl.username': 'finnhub',
+        'sasl.password': 'finnhub',
+        'error_cb': error_callback,
     }
 
-def kafka(event, context):
-    name = event['queryStringParameters']['clusterId']
+    p = Producer(params)
+    p.produce('finnhub_market', 'some payload1')
+    p.flush(10)
 
-    message GetDiskRequest {
-        string disk_id = 1;
-    }
+    c = Consumer(params)
+    c.subscribe(['finnhub_market'])
+    while True:
+        msg = c.poll(timeout=3.0)
+        if msg.value().decode() == 'some payload1':
+            return True
+    return False
 
-    
-    if ...:
-        return False
-    return True
