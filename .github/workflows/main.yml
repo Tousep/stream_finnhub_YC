@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   main:
-    name: 'Terraform'
+    name: 'Terraform test'
     runs-on: ubuntu-latest
     environment: uat
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
@@ -19,4 +19,4 @@ jobs:
     - name: 'Testing'
       uses: ./.github/workflows/test.yml
       with:
-        environmentсс: uat
+        environment: uat
