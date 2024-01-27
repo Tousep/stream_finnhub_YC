@@ -37,6 +37,9 @@ jobs:
     defaults:
       run:
         shell: bash
+    strategy:
+      matrix:
+        python: ["3.9", "3.10", "3.11"]
     
     steps:
         # Checkout the repository to the GitHub Actions runner
@@ -54,9 +57,13 @@ jobs:
       #     chmod 655 ./ca-certificates/Yandex/IntermediateCA.crt
       # - name: update serts
       #   run: update-ca-certificates
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python }}
       - name: pytest
         run: |
-          pip install request
-          pip install confluent_kafka
+          python -m pip install --upgrade pip
+          pip install -r ./terraform-ydb/test/requirements.txt
       - name: pytest
         run: python ./terraform-ydb/test/kafka.py
