@@ -1,26 +1,32 @@
-from confluent_kafka import Consumer, Producer
+from kafka import KafkaConsumer
 
 
 def kafka_check_topic(event, context):
-    params = {
-        'bootstrap.servers': 'rc1b-namn6f7m2172e4n9.mdb.yandexcloud.net:9091',
-        'security.protocol': 'SASL_SSL',
-        'ssl.ca.location': './ca-certificates/Yandex/YandexInternalRootCA.crt',
-        'sasl.mechanism': 'SCRAM-SHA-512',
-        'sasl.username': 'finnhub',
-        'sasl.password': 'finnhub',
-        'error_cb': error_callback,
-    }
+    producer = KafkaProducer(
+    bootstrap_servers=['rc1b-namn6f7m2172e4n9.mdb.yandexcloud.net:9091'],
+    security_protocol="SASL_SSL",
+    sasl_mechanism="SCRAM-SHA-512",
+    sasl_plain_username='finnhub',
+    sasl_plain_password='finnhub',
+    ssl_cafile="./ca-certificates/Yandex/YandexInternalRootCA.crt")
 
-    p = Producer(params)
-    p.produce('finnhub_market', 'some payload1')
-    p.flush(10)
+    producer.send('finnhub_market', b'test message', b'key')
+    producer.flush()
+    producer.close()
+    
+    consumer = KafkaConsumer(
+        'finnhub_market',
+        bootstrap_servers=['rc1b-namn6f7m2172e4n9.mdb.yandexcloud.net:9091'],
+        security_protocol="SASL_SSL",
+        sasl_mechanism="SCRAM-SHA-512",
+        sasl_plain_username='finnhub_c',
+        sasl_plain_password='finnhub_c',
+        ssl_cafile="./ca-certificates/Yandex/YandexInternalRootCA.crt")
 
-    c = Consumer(params)
-    c.subscribe(['finnhub_market'])
-    while True:
-        msg = c.poll(timeout=3.0)
-        if msg.value().decode() == 'some payload1':
+    print("ready")
+
+    for msg in consumer:
+        if msg.value.decode("utf-8") == 'some payload1':
             return True
     return False
 
