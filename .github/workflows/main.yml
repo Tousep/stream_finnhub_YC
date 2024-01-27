@@ -23,7 +23,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4    
     - name: 'LL'
-      run: 'locate terraform_destroy.yml'
+      run: 'tree'
     - name: 'Testing'
       uses: ./.github/workflows/test.yml
       with:
