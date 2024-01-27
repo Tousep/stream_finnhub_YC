@@ -16,6 +16,8 @@ jobs:
       run:
         shell: bash
     steps:
+    - name: 'LL'
+      run: 'tree ./'
     - name: 'Testing'
       uses: ./.github/workflows/test.yml
       with:
