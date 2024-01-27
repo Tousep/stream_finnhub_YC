@@ -52,7 +52,7 @@ jobs:
       # - name: chmod
       #   run: chmod 655 ./ca-certificates/Yandex/RootCA.crt
       #     chmod 655 ./ca-certificates/Yandex/IntermediateCA.crt
-      - name: update serts
-        run: update-ca-certificates
+      # - name: update serts
+      #   run: update-ca-certificates
       - name: pytest
         run: python ./terraform-ydb/test/kafka.py
