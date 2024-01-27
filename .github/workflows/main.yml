@@ -2,6 +2,10 @@ name: 'main'
 
 on: workflow_dispatch
 
+
+permissions:
+  contents: read
+
 jobs:
   main:
     name: 'Terraform'
@@ -11,8 +15,8 @@ jobs:
     defaults:
       run:
         shell: bash
-  steps:
-    name: 'Testing'
-    uses: Tousep/stream_finnhub_YC/.github/workflows/test.yml@main
-    with:
-      environmentсс: uat
+    steps:
+    - name: 'Testing'
+      uses: ./.github/workflows/test.yml
+      with:
+        environmentсс: uat
