@@ -12,7 +12,7 @@ jobs:
       run:
         shell: bash
   steps:
-    name:
+    name: 'Testing'
     uses: Tousep/stream_finnhub_YC/.github/workflows/test.yml@main
     with:
-      environmentсс: uatuat
+      environmentсс: uat
