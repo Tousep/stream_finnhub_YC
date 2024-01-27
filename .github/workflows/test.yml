@@ -8,12 +8,9 @@ on:
         required: True
         type: string
       environment:
-        description: 'Environment'
+        description: Environment
         required: True  
-        type: choice
-        options:
-          - uat
-          - prod
+        type: string
   workflow_dispatch:
     inputs: 
       version:
@@ -25,8 +22,8 @@ on:
         required: True
         type: choice
         options:
-          - uat
-          - prod
+        - uat
+        - prod
  
 permissions:
   contents: read
@@ -35,7 +32,7 @@ jobs:
   test_infra:
     name: 'Test infra'
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environmentcc }}
+    environment: ${{ inputs.environment }}
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:

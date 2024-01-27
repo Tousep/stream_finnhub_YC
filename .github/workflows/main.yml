@@ -17,6 +17,7 @@ jobs:
     defaults:
       run:
         shell: bash
+
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
@@ -26,4 +27,5 @@ jobs:
     - name: 'Testing'
       uses: ./.github/workflows/test.yml
       with:
+        version: 0.1.0
         environment: uat
