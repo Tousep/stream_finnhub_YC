@@ -2,11 +2,32 @@ name: 'Test infra'
 
 on:
   workflow_call:
-      inputs:
-        environmentсс:
-          required: true
-          type: string
-
+    inputs: 
+      version:
+        description: 'Version'
+        required: True
+        type: string
+      environment:
+        description: 'Environment'
+        required: True  
+        type: choice
+        options:
+          - uat
+          - prod
+  workflow_dispatch:
+    inputs: 
+      version:
+        description: 'Version'
+        required: True
+        type: string
+      environment:
+        description: 'Environment'
+        required: True
+        type: choice
+        options:
+          - uat
+          - prod
+ 
 permissions:
   contents: read
 
