@@ -50,8 +50,7 @@ jobs:
         with:
           args: -O ./ca-certificates/Yandex/IntermediateCA.crt https://storage.yandexcloud.net/cloud-certs/IntermediateCA.pem
       - name: chmod
-        run: chmod 655 \
-            ./ca-certificates/Yandex/RootCA.crt \
-            ./ca-certificates/Yandex/IntermediateCA.crt && \
+        run: chmod 655 ./ca-certificates/Yandex/RootCA.crt
+          chmod 655 ./ca-certificates/Yandex/IntermediateCA.crt
       - name: chmod
         run: update-ca-certificates
