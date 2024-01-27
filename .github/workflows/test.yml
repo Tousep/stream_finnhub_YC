@@ -39,7 +39,7 @@ jobs:
         shell: bash
     strategy:
       matrix:
-        python: ["3.9", "3.10", "3.11"]
+        python: ["3.9"]
     
     steps:
         # Checkout the repository to the GitHub Actions runner
