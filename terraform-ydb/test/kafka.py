@@ -21,6 +21,7 @@ def kafka_check_topic(event, context):
     while True:
         msg = c.poll(timeout=3.0)
         if msg.value().decode() == 'some payload1':
+            print(msg.value().decode())
             return True
     return False
 
