@@ -20,7 +20,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4    
     - name: 'LL'
-      run: 'tree ./'
+      run: 'tree ../'
     - name: 'Testing'
       uses: ./.github/workflows/test.yml
       with:
