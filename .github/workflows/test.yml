@@ -69,4 +69,4 @@ jobs:
       - name: pytest clichouse
         env: 
           uniq_msg: ${{ github.sha }}
-        run: python ./terraform-ydb/test/clichouse.py
+        run: python ./terraform-ydb/test/clickhouse.py
