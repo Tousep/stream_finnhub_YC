@@ -6,7 +6,7 @@ import requests
 def clickhouse_connection_check(event, context):
 
     response = requests.get(
-        'https://{0}.mdb.yandexcloud.net:8443'.format('rc1b-063qep40gn13ubgg'),
+        'https://{0}:8443'.format('rc1b-063qep40gn13ubgg.mdb.yandexcloud.net'),
         params={
             'query': 'SELECT version()',
         },
