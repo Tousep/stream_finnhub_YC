@@ -1,9 +1,9 @@
 from confluent_kafka import Consumer, Producer
 import time
 import os
+import requests
 
 def clickhouse_connection_check(event, context):
-    import requests
 
     response = requests.get(
         'https://{0}.mdb.yandexcloud.net:8443'.format('rc1b-063qep40gn13ubgg'),
