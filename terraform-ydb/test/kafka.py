@@ -20,6 +20,16 @@ def kafka_check_topic(event, context):
     p.produce('finnhub_market', 'some payload1')
     p.flush(10)
 
+    params = {
+        'bootstrap.servers': 'rc1b-aj44j15i0enkcn8v.mdb.yandexcloud.net:9091',
+        'security.protocol': 'SASL_SSL',
+        'ssl.ca.location': './ca-certificates/Yandex/YandexInternalRootCA.crt',
+        'sasl.mechanism': 'SCRAM-SHA-512',
+        'sasl.username': 'finnhub_c',
+        'sasl.password': 'finnhub_c',
+        'error_cb': error_callback,
+        'group.id': 'test-consumer1',
+    }
     c = Consumer(params)
     c.subscribe(['finnhub_market'])
 
