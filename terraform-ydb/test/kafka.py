@@ -12,6 +12,7 @@ def kafka_check_topic(event, context):
         'sasl.username': 'finnhub',
         'sasl.password': 'finnhub',
         'error_cb': error_callback,
+        'group.id': 'test-consumer1',
     }
 
     p = Producer(params)
