@@ -1,2 +1,3 @@
 confluent_kafka
 requests
+clickhouse_driver
