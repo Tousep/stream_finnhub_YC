@@ -63,4 +63,6 @@ jobs:
           cache: 'pip' # caching pip dependencies
       - run: pip install -r ./terraform-ydb/test/requirements.txt
       - name: pytest
+        env: 
+          uniq_msg: ${{ github.sha }}
         run: python ./terraform-ydb/test/kafka.py

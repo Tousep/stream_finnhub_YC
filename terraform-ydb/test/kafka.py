@@ -1,10 +1,12 @@
 from confluent_kafka import Consumer, Producer
 import time
+import os
 
 def error_callback(err):
     print('Something went wrong: {}'.format(err))
 
 def kafka_check_topic(event, context):
+    message = os.environ["uniq_msg"]
     params = {
         'bootstrap.servers': 'rc1b-aj44j15i0enkcn8v.mdb.yandexcloud.net:9091',
         'security.protocol': 'SASL_SSL',
@@ -17,7 +19,7 @@ def kafka_check_topic(event, context):
     }
 
     p = Producer(params)
-    p.produce('finnhub_market', 'some payload1')
+    p.produce('finnhub_market', message)
     p.flush(10)
 
     params = {
@@ -34,8 +36,8 @@ def kafka_check_topic(event, context):
     c = Consumer(params)
     c.subscribe(['finnhub_market'])
 
-    msg = c.poll(timeout=300.0)
-    if msg and msg.value().decode() == 'some payload1':
+    msg = c.poll(timeout=3.0)
+    if msg and msg.value().decode() == message:
         print(msg.value().decode())
         return True
     return False
