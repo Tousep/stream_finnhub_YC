@@ -1,5 +1,5 @@
 resource "yandex_serverless_container" "finnhubProducer" {
-   name               = "finnhubProducer"
+   name               = "finnhub-producer"
    memory             = 256
    service_account_id = var.YC_SERVICE_ACCOUNT_ID
     connectivity {
