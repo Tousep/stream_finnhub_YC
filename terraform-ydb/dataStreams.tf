@@ -25,4 +25,5 @@ resource "yandex_datatransfer_transfer" "finnhub-transfer" {
  source_id = "dtekf9jg0b832lu4e6b0"
  target_id   = "${yandex_datatransfer_endpoint.cl-target.id}"
  type        = "INCREMENT_ONLY"
+ 
 }
