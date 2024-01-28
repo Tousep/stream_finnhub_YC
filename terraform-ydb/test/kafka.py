@@ -29,6 +29,7 @@ def kafka_check_topic(event, context):
         'sasl.password': 'finnhub_c',
         'error_cb': error_callback,
         'group.id': 'test-consumer1',
+        'auto.offset.reset': 'latest',
     }
     c = Consumer(params)
     c.subscribe(['finnhub_market'])
