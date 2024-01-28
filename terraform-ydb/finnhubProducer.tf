@@ -12,7 +12,7 @@ resource "yandex_serverless_container" "finnhubProducer" {
             FINNHUB_STOCKS_TICKERS=jsonencode(var.finnhub_stocks_tickers)
             FINNHUB_API_TOKEN="cmr7om9r01qvmr5q3120cmr7om9r01qvmr5q312g"
             FINNHUB_VALIDATE_TICKERS="1"
-            KAFKA_SERVER="rc1b-84a7m3t1le6q0e7s.mdb.yandexcloud.net"
+            KAFKA_SERVER="rc1b-aj44j15i0enkcn8v.mdb.yandexcloud.net"
             KAFKA_PORT="9091"
             KAFKA_SSL_PATH="/usr/local/share/ca-certificates/Yandex/YandexInternalRootCA.crt"
             KAFKA_TOPIC_NAME="finnhub_market"
