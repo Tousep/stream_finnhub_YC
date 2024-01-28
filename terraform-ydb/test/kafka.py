@@ -22,11 +22,11 @@ def kafka_check_topic(event, context):
 
     c = Consumer(params)
     c.subscribe(['finnhub_market'])
-    while True:
-        msg = c.poll(timeout=300.0)
-        if msg.value().decode() == 'some payload1':
-            print(msg.value().decode())
-            return True
+
+    msg = c.poll(timeout=300.0)
+    if msg and msg.value().decode() == 'some payload1':
+        print(msg.value().decode())
+        return True
     return False
 
 if __name__ == '__main__':
