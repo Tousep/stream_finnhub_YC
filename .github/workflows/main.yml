@@ -27,8 +27,29 @@ jobs:
       uses: actions/checkout@v2    
     - name: 'LL'
       run: 'tree'
+    - name: 'Applay uat'
+
+      uses: ./.github/workflows/terraform_apply.yml
+      with:
+        version: 0.1.0
+        environment: uat
+
     - name: 'Testing'
       uses: ./.github/workflows/test.yml
       with:
         version: 0.1.0
         environment: uat
+
+    - name: 'Destroy uat'
+      if: always()
+      uses: ./.github/workflows/terraform_destroy.yml
+      with:
+        version: 0.1.0
+        environment: uat
+    
+    # create and apply PR from uat to prod
+    - name: 'Applay prod'
+      uses: ./.github/workflows/terraform_apply.yml
+      with:
+        version: 0.1.0
+        environment: prod
