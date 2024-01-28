@@ -37,9 +37,6 @@ jobs:
     defaults:
       run:
         shell: bash
-    strategy:
-      matrix:
-        python: ["3.9"]
     
     steps:
         # Checkout the repository to the GitHub Actions runner
