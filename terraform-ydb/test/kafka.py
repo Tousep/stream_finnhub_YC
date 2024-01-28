@@ -28,4 +28,4 @@ def kafka_check_topic(event, context):
     return False
 
 if __name__ == '__main__':
-    kafka_check_topic()
+    kafka_check_topic(1,2)
