@@ -1,10 +1,29 @@
 name: 'Terraform destroy'
 
-on: workflow_dispatch
-  # workflow_run:
-  #   workflows: ["Docker Image CI"]
-  #   types:
-  #     - completed
+on:
+  workflow_call:
+    inputs: 
+      version:
+        description: 'Version'
+        required: True
+        type: string
+      environment:
+        description: Environment
+        required: True  
+        type: string
+  workflow_dispatch:
+    inputs: 
+      version:
+        description: 'Version'
+        required: True
+        type: string
+      environment:
+        description: 'Environment'
+        required: True
+        type: choice
+        options:
+        - uat
+        - prod
 
 permissions:
   contents: read
@@ -13,7 +32,7 @@ jobs:
   terraform_destroy:
     name: 'Terraform destroy'
     runs-on: ubuntu-latest
-    environment: uat
+    environment: ${{ inputs.environment }}
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:

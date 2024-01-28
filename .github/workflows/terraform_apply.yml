@@ -1,10 +1,29 @@
 name: 'Terraform apply'
 
-on: workflow_dispatch
-  # workflow_run:
-  #   workflows: ["Docker Image CI"]
-  #   types:
-  #     - completed
+on:
+  workflow_call:
+    inputs: 
+      version:
+        description: 'Version'
+        required: True
+        type: string
+      environment:
+        description: Environment
+        required: True  
+        type: string
+  workflow_dispatch:
+    inputs: 
+      version:
+        description: 'Version'
+        required: True
+        type: string
+      environment:
+        description: 'Environment'
+        required: True
+        type: choice
+        options:
+        - uat
+        - prod
 
 permissions:
   contents: read
@@ -13,7 +32,7 @@ jobs:
   terraform_apply:
     name: 'Terraform apply'
     runs-on: ubuntu-latest
-    environment: uat
+    environment: ${{ inputs.environment }}
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
@@ -35,21 +54,6 @@ jobs:
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
-    
-    # - name: Setup Terraform Backend
-    #   id: backend
-    #   run: |
-    #     cat > backend.tf << EOF
-    #     terraform {
-    #       backend "remote" {
-    #         organization = "${secrets.TF_CLOUD_ORGANIZATION}"
-
-    #         workspaces {
-    #           name = "${secrets.TF_CLOUD_WORKSPACE}"
-    #         }
-    #       }
-    #     }
-    #     EOF
       
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
