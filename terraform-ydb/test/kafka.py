@@ -1,5 +1,7 @@
 from confluent_kafka import Consumer, Producer
 
+def error_callback(err):
+    print('Something went wrong: {}'.format(err))
 
 def kafka_check_topic(event, context):
     params = {
@@ -25,3 +27,5 @@ def kafka_check_topic(event, context):
             return True
     return False
 
+if __name__ == '__main__':
+    kafka_check_topic()
