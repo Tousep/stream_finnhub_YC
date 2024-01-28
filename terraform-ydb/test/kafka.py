@@ -5,7 +5,7 @@ def error_callback(err):
 
 def kafka_check_topic(event, context):
     params = {
-        'bootstrap.servers': 'rc1b-namn6f7m2172e4n9.mdb.yandexcloud.net:9091',
+        'bootstrap.servers': 'rc1b-aj44j15i0enkcn8v.mdb.yandexcloud.net:9091',
         'security.protocol': 'SASL_SSL',
         'ssl.ca.location': './ca-certificates/Yandex/YandexInternalRootCA.crt',
         'sasl.mechanism': 'SCRAM-SHA-512',
