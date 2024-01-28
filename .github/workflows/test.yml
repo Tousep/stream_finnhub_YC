@@ -62,7 +62,11 @@ jobs:
           python-version: '3.9'
           cache: 'pip' # caching pip dependencies
       - run: pip install -r ./terraform-ydb/test/requirements.txt
-      - name: pytest
+      - name: pytest kafka
         env: 
           uniq_msg: ${{ github.sha }}
         run: python ./terraform-ydb/test/kafka.py
+      - name: pytest clichouse
+        env: 
+          uniq_msg: ${{ github.sha }}
+        run: python ./terraform-ydb/test/clichouse.py
