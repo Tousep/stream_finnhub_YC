@@ -52,6 +52,9 @@ jobs:
       - uses: wei/wget@v1
         with:
           args: -O ./ca-certificates/Yandex/IntermediateCA.crt https://storage.yandexcloud.net/cloud-certs/IntermediateCA.pem
+      - uses: wei/wget@v1
+        with:
+          args: -O ./ca-certificates/Yandex/YandexInternalRootCA.crt https://storage.yandexcloud.net/cloud-certs/CA.pem
       # - name: chmod
       #   run: chmod 655 ./ca-certificates/Yandex/RootCA.crt
       #     chmod 655 ./ca-certificates/Yandex/IntermediateCA.crt
