@@ -43,7 +43,7 @@ def kafka_check_topic(event, context):
 
 if __name__ == '__main__':
     event = {
-        'bootstrapServers': 'rc1b-aj44j15i0enkcn8v.mdb.yandexcloud.net:9091',
+        'bootstrapServers': 'rc1b-hdlnk60rkhbd5b1g.mdb.yandexcloud.net:9091',
         'topic': 'finnhub_market',
         'user_p': 'finnhub',
         'user_c': 'finnhub_c',
