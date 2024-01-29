@@ -29,6 +29,7 @@ def clickhouse_connection_check(event, context):
 
     response.raise_for_status()
     if response.text:
+        print(response.text)
         return True
     return False
 
