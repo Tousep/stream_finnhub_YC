@@ -51,7 +51,8 @@ jobs:
       - run: |
             sudo prlimit --pid $$ --nofile=500000:500000
             ulimit -a
-      - run: ping 51.250.111.238  
+      - run: ping rc1b-hdlnk60rkhbd5b1g.mdb.yandexcloud.net
+
       - run: mkdir --parents ./ca-certificates/Yandex
       - uses: wei/wget@v1
         with:
