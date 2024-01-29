@@ -29,7 +29,7 @@ jobs:
       run: 'tree'
     
     - name: 'build and push docker images'
-      uses: ./.github/workflows/docker-image.yml
+      uses: ./.github/workflows/docker-image.yml@main
       with:
         version: 0.1.0
         environment: uat
