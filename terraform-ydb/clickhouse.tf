@@ -16,6 +16,7 @@ host {
     type      = "CLICKHOUSE"
     zone      = "ru-central1-b"
     subnet_id = "${yandex_vpc_subnet.finnhub_subnet.id}"
+    assign_public_ip = true
   }
 
   database {
