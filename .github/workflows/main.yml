@@ -27,8 +27,13 @@ jobs:
       uses: actions/checkout@v2    
     - name: 'LL'
       run: 'tree'
+    
+    - name: 'build and push docker images'
+      uses: ./.github/workflows/docker-image.yml
+      with:
+        version: 0.1.0
+        environment: uat
     - name: 'Applay uat'
-
       uses: ./.github/workflows/terraform_apply.yml
       with:
         version: 0.1.0
@@ -46,7 +51,11 @@ jobs:
       with:
         version: 0.1.0
         environment: uat
-    
+    - name: 'build and push docker images'
+      uses: ./.github/workflows/docker-image.yml
+      with:
+        version: 0.1.0
+        environment: prod
     # create and apply PR from uat to prod
     - name: 'Applay prod'
       uses: ./.github/workflows/terraform_apply.yml
