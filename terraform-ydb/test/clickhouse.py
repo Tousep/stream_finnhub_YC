@@ -6,7 +6,7 @@ from clickhouse_driver import Client
 
 def clickhouse_connection_check(event, context):
 
-    client = Client(host='rc1b-063qep40gn13ubgg.mdb.yandexcloud.net',
+    client = Client(host='rc1b-cskcq8u3ogqc385s.mdb.yandexcloud.net',
                     user='finnhub_cl',
                     password='finnhub_cl',
                     port=9000,
