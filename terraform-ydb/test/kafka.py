@@ -16,7 +16,6 @@ def kafka_check_topic(event, context):
         'sasl.password': event['user_p'],
         'error_cb': error_callback,
     }
-    print(1)
     p = Producer(params)
     p.produce(event['topic'], event['message'])
     p.flush(10)
@@ -32,10 +31,11 @@ def kafka_check_topic(event, context):
         'group.id': 'test-consumer1',
         'auto.offset.reset': 'latest',
     }
-    print(2)
-    c = Consumer(params)
-    c.subscribe([event['topic']])
 
+    c = Consumer(params)
+    print(1)
+    c.subscribe([event['topic']])
+    print(2)
     msg = c.poll(timeout=3.0)
     if msg: # and msg.value().decode() == event['message']:
         print(msg.value().decode())
