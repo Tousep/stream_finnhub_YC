@@ -53,6 +53,9 @@ jobs:
             ulimit -a
       - run: ifconfig
       - run: nslookup rc1b-hdlnk60rkhbd5b1g.mdb.yandexcloud.net
+      - run: cat /etc/resolv.conf
+
+      
       - run: mkdir --parents ./ca-certificates/Yandex
       - uses: wei/wget@v1
         with:
