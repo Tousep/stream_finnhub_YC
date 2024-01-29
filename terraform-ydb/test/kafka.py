@@ -22,7 +22,7 @@ def kafka_check_topic(event, context):
     p.flush(10)
 
     params = {
-        'bootstrap.servers': 'rc1b-aj44j15i0enkcn8v.mdb.yandexcloud.net:9091',
+        'bootstrap.servers': event['bootstrapServers'],
         'security.protocol': 'SASL_SSL',
         'ssl.ca.location': './ca-certificates/Yandex/YandexInternalRootCA.crt',
         'sasl.mechanism': 'SCRAM-SHA-512',
