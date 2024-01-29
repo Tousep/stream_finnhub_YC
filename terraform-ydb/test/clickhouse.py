@@ -32,4 +32,4 @@ def clickhouse_connection_check(event, context):
 
 
 if __name__ == '__main__':
-    clickhouse_connection_check(1,2)
+    assert clickhouse_connection_check(1,2)

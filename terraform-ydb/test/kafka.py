@@ -49,4 +49,4 @@ if __name__ == '__main__':
         'user_c': 'finnhub_c',
         'message': os.environ["uniq_msg"]
     }
-    kafka_check_topic(event, 'userg')
+    assert kafka_check_topic(event, 'userg')
