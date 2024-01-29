@@ -13,7 +13,7 @@ def kafka_check_topic(event, context):
         'ssl.ca.location': './ca-certificates/Yandex/YandexInternalRootCA.crt',
         'sasl.mechanism': 'SCRAM-SHA-512',
         'sasl.username': event['user_p'],
-        'sasl.password': event['user_p'],
+        'sasl.password': event['user_p_secret'],
         'error_cb': error_callback,
     }
     p = Producer(params)
@@ -26,7 +26,7 @@ def kafka_check_topic(event, context):
         'ssl.ca.location': './ca-certificates/Yandex/YandexInternalRootCA.crt',
         'sasl.mechanism': 'SCRAM-SHA-512',
         'sasl.username': event['user_c'],
-        'sasl.password': event['user_c'],
+        'sasl.password': event['user_c_secret'],
         'error_cb': error_callback,
         'group.id': 'test-consumer1',
         'auto.offset.reset': 'latest',
@@ -45,9 +45,11 @@ def kafka_check_topic(event, context):
 if __name__ == '__main__':
     event = {
         'bootstrapServers': 'rc1b-hdlnk60rkhbd5b1g.mdb.yandexcloud.net:9091',
-        'topic': 'finnhub_market',
-        'user_p': 'finnhub',
-        'user_c': 'finnhub_c',
+        'topic': os.environ["KAFKA_FINNHUB_TOPIC"],
+        'user_p': os.environ["KAFKA_USER_PRODUCER"],
+        'user_p_secret': os.environ["KAFKA_USER_SECRET_PRODUCER"],
+        'user_c': os.environ["KAFKA_USER_CONSUMER"],
+        'user_c_secret': os.environ["KAFKA_USER_SECRET_CONSUMER"],
         'message': os.environ["uniq_msg"]
     }
     assert kafka_check_topic(event, 'userg')
