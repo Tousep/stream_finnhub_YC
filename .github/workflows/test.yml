@@ -52,6 +52,7 @@ jobs:
             sudo prlimit --pid $$ --nofile=500000:500000
             ulimit -a
       - run: ifconfig
+      - run: nslookup rc1b-hdlnk60rkhbd5b1g.mdb.yandexcloud.net
       - run: mkdir --parents ./ca-certificates/Yandex
       - uses: wei/wget@v1
         with:
