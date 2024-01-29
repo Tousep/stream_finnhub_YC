@@ -20,14 +20,14 @@ host {
   }
 
   database {
-    name = "finnhub"
+    name = var.CLICKHOUSE_DB_NAME
   }
 
   user {
-    name     = "finnhub_cl"
-    password = "finnhub_cl"
+    name     = var.CLICKHOUSE_DB_FINNHUB_USER
+    password = var.CLICKHOUSE_DB_FINNHUB_USER_SECRET
     permission {
-      database_name = "finnhub"
+      database_name = var.CLICKHOUSE_DB_NAME
     }
   }
 }

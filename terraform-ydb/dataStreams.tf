@@ -7,10 +7,10 @@ resource "yandex_datatransfer_endpoint" "cl-target" {
      connection {
        connection_options {
          mdb_cluster_id = yandex_mdb_clickhouse_cluster.finnhub.id
-         database       = "finnhub"
-         user           = "finnhub_cl"
+         database       = var.CLICKHOUSE_DB_NAME
+         user           = var.CLICKHOUSE_DB_FINNHUB_USER
          password {
-           raw = "finnhub_cl"
+           raw = var.CLICKHOUSE_DB_FINNHUB_USER_SECRET
          }
        }
      }

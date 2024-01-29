@@ -10,17 +10,17 @@ resource "yandex_serverless_container" "finnhubProducer" {
       url = "cr.yandex/${var.YC_CONTAINER_REGISTRY}/finnhub_producer:latest"
       environment = {
             FINNHUB_STOCKS_TICKERS=jsonencode(var.finnhub_stocks_tickers)
-            FINNHUB_API_TOKEN="cmr7om9r01qvmr5q3120cmr7om9r01qvmr5q312g"
+            FINNHUB_API_TOKEN=var.FINNHUB_API_KEY
             FINNHUB_VALIDATE_TICKERS="1"
             KAFKA_SERVER="rc1b-hdlnk60rkhbd5b1g.mdb.yandexcloud.net"
             KAFKA_PORT="9091"
             KAFKA_SSL_PATH="/usr/local/share/ca-certificates/Yandex/YandexInternalRootCA.crt"
-            KAFKA_TOPIC_NAME="finnhub_market"
+            KAFKA_TOPIC_NAME=var.KAFKA_FINNHUB_TOPIC
             KAFKA_MIN_PARTITIONS="1"
             security_protocol="SASL_SSL",
             sasl_mechanism="SCRAM-SHA-512",
-            sasl_plain_username="finnhub",
-            sasl_plain_password="finnhub"
+            sasl_plain_username=var.KAFKA_USER_PRODUCER,
+            sasl_plain_password=var.KAFKA_USER_SECRET_PRODUCER
       }
     
   }

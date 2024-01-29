@@ -26,7 +26,7 @@ resource "yandex_mdb_kafka_cluster" "finnhub" {
 }
 resource "yandex_mdb_kafka_topic" "finnhub_market" {
   cluster_id         = yandex_mdb_kafka_cluster.finnhub.id
-  name               = "finnhub_market"
+  name               = var.KAFKA_FINNHUB_TOPIC
   partitions         = 1
   replication_factor = 1
   topic_config {
@@ -36,20 +36,20 @@ resource "yandex_mdb_kafka_topic" "finnhub_market" {
 
 resource "yandex_mdb_kafka_user" "finnhub_market_p" {
   cluster_id = yandex_mdb_kafka_cluster.finnhub.id
-  name       = "finnhub"
-  password   = "finnhub"
+  name       = var.KAFKA_USER_PRODUCER
+  password   = var.KAFKA_USER_SECRET_PRODUCER
   permission {
-    topic_name = "finnhub_market"
+    topic_name = var.KAFKA_FINNHUB_TOPIC
     role       = "ACCESS_ROLE_PRODUCER"
   }
 }
 
 resource "yandex_mdb_kafka_user" "finnhub_market_c" {
   cluster_id = yandex_mdb_kafka_cluster.finnhub.id
-  name       = "finnhub_c"
-  password   = "finnhub_c"
+  name       = var.KAFKA_USER_CONSUMER
+  password   = var.KAFKA_USER_SECRET_CONSUMER
   permission {
-    topic_name = "finnhub_market"
+    topic_name = var.KAFKA_FINNHUB_TOPIC
     role       = "ACCESS_ROLE_CONSUMER"
   }
 }
