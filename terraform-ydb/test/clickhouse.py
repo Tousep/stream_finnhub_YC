@@ -28,7 +28,9 @@ def clickhouse_connection_check(event, context):
     )
 
     response.raise_for_status()
-    print(response.text)
+    if response.text:
+        return True
+    return False
 
 
 if __name__ == '__main__':
