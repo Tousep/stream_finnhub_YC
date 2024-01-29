@@ -44,13 +44,12 @@ jobs:
       with:
         version: 0.1.0
         environment: uat
-
-    - name: 'Destroy uat'
-      if: always()
-      uses: ./.github/workflows/terraform_destroy.yml
-      with:
-        version: 0.1.0
-        environment: uat
+    # - name: 'Destroy uat'
+    #   if: always()
+    #   uses: ./.github/workflows/terraform_destroy.yml
+    #   with:
+    #     version: 0.1.0
+    #     environment: uat
     - name: 'build and push docker images'
       uses: ./.github/workflows/docker-image.yml
       with:
