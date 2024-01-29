@@ -8,18 +8,17 @@ def error_callback(err):
 def kafka_check_topic(event, context):
     message = os.environ["uniq_msg"]
     params = {
-        'bootstrap.servers': 'rc1b-aj44j15i0enkcn8v.mdb.yandexcloud.net:9091',
+        'bootstrap.servers': event['bootstrapServers'],
         'security.protocol': 'SASL_SSL',
         'ssl.ca.location': './ca-certificates/Yandex/YandexInternalRootCA.crt',
         'sasl.mechanism': 'SCRAM-SHA-512',
-        'sasl.username': 'finnhub',
-        'sasl.password': 'finnhub',
+        'sasl.username': event['user_p'],
+        'sasl.password': event['user_p'],
         'error_cb': error_callback,
-        'group.id': 'test-consumer1',
     }
 
     p = Producer(params)
-    p.produce('finnhub_market', message)
+    p.produce(event['topic'], event['message'])
     p.flush(10)
 
     params = {
@@ -27,20 +26,27 @@ def kafka_check_topic(event, context):
         'security.protocol': 'SASL_SSL',
         'ssl.ca.location': './ca-certificates/Yandex/YandexInternalRootCA.crt',
         'sasl.mechanism': 'SCRAM-SHA-512',
-        'sasl.username': 'finnhub_c',
-        'sasl.password': 'finnhub_c',
+        'sasl.username': event['user_c'],
+        'sasl.password': event['user_c'],
         'error_cb': error_callback,
         'group.id': 'test-consumer1',
         'auto.offset.reset': 'latest',
     }
     c = Consumer(params)
-    c.subscribe(['finnhub_market'])
+    c.subscribe([event['topic']])
 
     msg = c.poll(timeout=3.0)
-    if msg and msg.value().decode() == message:
+    if msg and msg.value().decode() == event['message']:
         print(msg.value().decode())
         return True
     return False
 
 if __name__ == '__main__':
-    kafka_check_topic(1,2)
+    event = {
+        'bootstrapServers': 'rc1b-aj44j15i0enkcn8v.mdb.yandexcloud.net:9091',
+        'topic': 'finnhub_market',
+        'user_p': 'finnhub',
+        'user_c': 'finnhub_c',
+        'message': os.environ["uniq_msg"]
+    }
+    kafka_check_topic(event, 'userg')
