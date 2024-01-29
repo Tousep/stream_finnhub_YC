@@ -51,6 +51,7 @@ jobs:
       - run: |
             sudo prlimit --pid $$ --nofile=500000:500000
             ulimit -a
+      - run: ifconfig
       - run: mkdir --parents ./ca-certificates/Yandex
       - uses: wei/wget@v1
         with:
