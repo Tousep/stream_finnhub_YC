@@ -76,8 +76,15 @@ jobs:
       - name: pytest kafka
         env: 
           uniq_msg: ${{ github.sha }}
+          CLICKHOUSE_DB_FINNHUB_USER: ${{ secrets.CLICKHOUSE_DB_FINNHUB_USER }}
+          CLICKHOUSE_DB_FINNHUB_USER_SECRET: ${{ secrets.CLICKHOUSE_DB_FINNHUB_USER_SECRET }}
         run: python ./terraform-ydb/test/kafka.py
       - name: pytest clichouse
         env: 
           uniq_msg: ${{ github.sha }}
+          KAFKA_FINNHUB_TOPIC: ${{ secrets.KAFKA_FINNHUB_TOPIC }}
+          KAFKA_USER_PRODUCER: ${{ secrets.KAFKA_USER_PRODUCER }}
+          KAFKA_USER_SECRET_PRODUCER: ${{ secrets.KAFKA_USER_SECRET_PRODUCER }}
+          KAFKA_USER_CONSUMER: ${{ secrets.KAFKA_USER_CONSUMER }}
+          KAFKA_USER_SECRET_CONSUMER: ${{ secrets.KAFKA_USER_SECRET_CONSUMER }}
         run: python ./terraform-ydb/test/clickhouse.py
