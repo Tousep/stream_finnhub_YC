@@ -13,6 +13,8 @@
     5. Собрать и отправить Docker-образы в облачную папку PROD.
     6. Запланировать и применить Terraform к облачной папке PROD.
 
+![Arch](https://github.com/Tousep/stream_finnhub_YC/blob/main/.github/workflows/workflow-Plan.jpeg)
+
 ## Рабочие процессы
 
 ### 1. `main.yml`
