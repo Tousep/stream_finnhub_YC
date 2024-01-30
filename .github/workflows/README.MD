@@ -13,6 +13,8 @@ This workflow is part of my research project; however, it currently encounters i
     5. Build and push Docker images to the PROD cloud folder.
     6. Plan and apply Terraform to the PROD cloud folder.
 
+![Arch](sd)
+
 ## Workflows
 
 ### 1. `main.yml`
