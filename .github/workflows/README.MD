@@ -3,7 +3,7 @@
 This workflow is part of my research project; however, it currently encounters issues and is not functioning as expected.
 
 ## Plans
-
+```
 1. Create a pull request to the `uat` branch.
 Execute the `main.yml` workflow, which comprises the following steps:
 2. Build and push Docker images to the UAT cloud folder.
@@ -13,7 +13,7 @@ Execute the `main.yml` workflow, which comprises the following steps:
 4. Build and push Docker images to the PROD cloud folder.
 5. Plan and apply Terraform to the PROD cloud folder.
 6. Create a pull request to the `prod` branch.
-
+```
 ![Arch](https://github.com/Tousep/stream_finnhub_YC/blob/main/.github/workflows/workflow-plan.jpg)
 
 ## Workflows
