@@ -10,7 +10,7 @@ terraform {
     endpoints = {
       s3 = "https://storage.yandexcloud.net"
     }
-    bucket = "naa-s3-for-terraform-state"
+    bucket = var.S3_TERRAFORM
     region = "ru-central1"
     key    = "resources/uat/main.tfstate"
 

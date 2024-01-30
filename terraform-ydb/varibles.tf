@@ -57,3 +57,7 @@ variable "KAFKA_USER_SECRET_PRODUCER" {
   type= string 
   sensitive= true
   }
+variable "S3_TERRAFORM" {
+  type= string 
+  sensitive= true
+  }
