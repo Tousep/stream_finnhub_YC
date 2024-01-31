@@ -51,7 +51,7 @@ jobs:
       env:
         CR_REGISTRY: ${{ vars.YC_CONTAINER_REGISTRY }}
         CR_REPOSITORY: finnhub_producer
-        WORK_DIR: finnhubProducer
+        WORK_DIR: docker/finnhubProducer
         IMAGE_TAG: ${{ github.sha }}
         YC_TOKEN: ${{ steps.issue-iam-token.outputs.token }}
       run: |
