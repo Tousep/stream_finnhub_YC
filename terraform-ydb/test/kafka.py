@@ -37,7 +37,7 @@ def kafka_check_topic(event, context):
     c.subscribe([event['topic']])
     print(2)
     msg = c.poll(timeout=3.0)
-    if msg: # and msg.value().decode() == event['message']:
+    if msg and msg.value().decode() == event['message']:
         print(msg.value().decode())
         return True
     return False

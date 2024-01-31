@@ -7,27 +7,19 @@ permissions:
   contents: read
 
 jobs:
-  # checkout:
-  #   uses: ./.github/workflows/test.yml
-  #   with:
-  #     version: 0.1.0
-  #     environment: uat
   main:
     name: 'Terraform test'
     runs-on: ubuntu-latest
     environment: uat
-    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
         shell: bash
 
     steps:
-    # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v2    
     - name: 'LL'
       run: 'tree'
-    
     - name: 'build and push docker images'
       uses: ./.github/workflows/docker-image.yml@main
       with:
@@ -55,9 +47,10 @@ jobs:
       with:
         version: 0.1.0
         environment: prod
-    # create and apply PR from uat to prod
+    
     - name: 'Applay prod'
       uses: ./.github/workflows/terraform_apply.yml
       with:
         version: 0.1.0
         environment: prod
+    # create and apply PR from uat to prod
